@@ -1,1 +1,2 @@
 include taggy/gui/data/main_window.glade
+include taggy/gui/data/tag_editor.glade

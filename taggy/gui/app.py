@@ -1,5 +1,6 @@
-import os
 from gi.repository import Gtk
+from . import util
+from .tag_editor import TagEditor
 
 
 class Handler:
@@ -8,14 +9,16 @@ class Handler:
 
 
 def on_activate(app):
-    path = os.path.dirname(os.path.realpath(__file__))
     builder = Gtk.Builder()
-    builder.add_from_file(path + "/data/main_window.glade")
+    builder.add_from_file(util.get_glade("main_window.glade"))
     builder.connect_signals(Handler())
 
     window = builder.get_object("main_window")
     window.set_application(app)
     window.show_all()
+
+    paned = builder.get_object("paned")
+    paned.add(TagEditor())
 
 
 app = Gtk.Application(application_id="moe.zaun.Taggy")
